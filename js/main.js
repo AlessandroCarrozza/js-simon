@@ -6,10 +6,12 @@ const titleSecondsDom = document.getElementById("title-seconds");
 const btnResultDom = document.getElementById("btn-result");
 const mainTitleDom = document.getElementById("main-title");
 
+// variabili globali
 let score = 0;
 let randomNumbersList = [];
 let userNumbers = [];
 let valid = false;
+let guessedNumbers = [];
 
 
 showRandomNumbers(0, 5, randomNumbersList);
@@ -17,8 +19,15 @@ console.log(randomNumbersList);
 
 btnResultDom.addEventListener("click" , function(){
     checkNumbers();
-    titleSecondsDom.innerHTML = `Ti sei ricordato ${score} numeri su 5.`;
+    let resultNumbers = "";
+    if (guessedNumbers.length > 0) {
+        resultNumbers = `I numeri indovinati sono: ${guessedNumbers}`;
+    } else {
+        resultNumbers = `Non hai indovinato neanche un numero!`;
+    }
+    titleSecondsDom.innerHTML = `Ti sei ricordato ${score} numeri su 5. ${resultNumbers}`;
     mainTitleDom.innerHTML = "";
+    console.log(guessedNumbers);
 })
 
 
@@ -36,11 +45,11 @@ function showRandomNumbers (min, max, yourList) {
     }  
     numbersDom.innerHTML = yourList;
 
-    countDown(15);
-
+    countDown(2);
 }
 
 
+// function per calcolare quanti numeri sono stati indovinati
 function checkNumbers () {
 
     if (!valid) {
@@ -48,6 +57,7 @@ function checkNumbers () {
         
             if (randomNumbersList.includes(userNumbers[i])) {
                 score++;
+                guessedNumbers.push(userNumbers[i]);
             }
         }
         valid = true;
@@ -56,10 +66,7 @@ function checkNumbers () {
 }
 
 
-
-
-
-
+// function per creare un countdown
 function countDown (secondsNumber) {
     let seconds = secondsNumber;
     secondsDom.innerHTML = seconds;
@@ -83,7 +90,7 @@ function countDown (secondsNumber) {
     }, 1000);
 }
 
-
+// function per creare la lista dei numeri scelti dall'utente
 function userChosenNumbers (number) {
     let chosenNumber = 0;
     for (let i = 0; i < number; i++) {
