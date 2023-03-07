@@ -5,13 +5,10 @@ const secondsDom = document.getElementById("seconds");
 const titleSecondsDom = document.getElementById("title-seconds");
 
 let randomNumbersList = [];
-
+let userNumbers = [];
 
 showRandomNumbers(0, 5, randomNumbersList);
 console.log(randomNumbersList);
-
-
-
 
 
 
@@ -39,6 +36,7 @@ function countDown (secondsNumber) {
             clearInterval(clock);
             titleSecondsDom.innerHTML = "Tempo scaduto";
             numbersDom.innerHTML = "";
+            userChosenNumbers ();
         } else {
             secondsDom.innerHTML = seconds;
             seconds--;
@@ -47,6 +45,15 @@ function countDown (secondsNumber) {
 }
 
 
+function userChosenNumbers () {
+    let chosenNumber = 0;
+    for (let i = 0; i < 5; i++) {
+        
+        chosenNumber = parseInt(prompt("Inserisci un numero"));
+        userNumbers.push(chosenNumber);
+    }
+    console.log(userNumbers);
+}
 
 
 
