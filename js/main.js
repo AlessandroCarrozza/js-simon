@@ -29,18 +29,20 @@ function showRandomNumbers (min, max, yourList) {
 
 function countDown (secondsNumber) {
     let seconds = secondsNumber;
-
+    secondsDom.innerHTML = seconds;
+    seconds--;
     const clock = setInterval( function() {
 
         if (seconds == 0) {
             clearInterval(clock);
             titleSecondsDom.innerHTML = "Tempo scaduto";
             numbersDom.innerHTML = "";
-            userChosenNumbers ();
+            setTimeout(userChosenNumbers (), 100);
         } else {
             secondsDom.innerHTML = seconds;
             seconds--;
         }
+        
     }, 1000);
 }
 
