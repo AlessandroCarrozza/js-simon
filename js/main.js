@@ -3,12 +3,24 @@
 const numbersDom = document.getElementById("numbers");
 const secondsDom = document.getElementById("seconds");
 const titleSecondsDom = document.getElementById("title-seconds");
+const btnResultDom = document.getElementById("btn-result");
+const mainTitleDom = document.getElementById("main-title");
 
+let score = 0;
 let randomNumbersList = [];
 let userNumbers = [];
+let valid = false;
+
 
 showRandomNumbers(0, 5, randomNumbersList);
 console.log(randomNumbersList);
+
+btnResultDom.addEventListener("click" , function(){
+    checkNumbers();
+    titleSecondsDom.innerHTML = `Ti sei ricordato ${score} numeri su 5.`;
+    mainTitleDom.innerHTML = "";
+})
+
 
 
 
@@ -24,8 +36,29 @@ function showRandomNumbers (min, max, yourList) {
     }  
     numbersDom.innerHTML = yourList;
 
-    countDown(3);
+    countDown(15);
+
 }
+
+
+function checkNumbers () {
+
+    if (!valid) {
+        for (let i = 0; i < randomNumbersList.length; i++) {
+        
+            if (randomNumbersList.includes(userNumbers[i])) {
+                score++;
+            }
+        }
+        valid = true;
+    }
+
+}
+
+
+
+
+
 
 function countDown (secondsNumber) {
     let seconds = secondsNumber;
@@ -37,7 +70,11 @@ function countDown (secondsNumber) {
             clearInterval(clock);
             titleSecondsDom.innerHTML = "Tempo scaduto";
             numbersDom.innerHTML = "";
-            setTimeout(userChosenNumbers (), 100);
+             setTimeout(function(){
+                 userChosenNumbers(5);
+                 btnResultDom.classList.remove("d-none");
+            }, 100);
+
         } else {
             secondsDom.innerHTML = seconds;
             seconds--;
@@ -47,9 +84,9 @@ function countDown (secondsNumber) {
 }
 
 
-function userChosenNumbers () {
+function userChosenNumbers (number) {
     let chosenNumber = 0;
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < number; i++) {
         
         chosenNumber = parseInt(prompt("Inserisci un numero"));
         userNumbers.push(chosenNumber);
