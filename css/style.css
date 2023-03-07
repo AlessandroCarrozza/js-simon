@@ -1,19 +1,43 @@
+/* utility */
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     text-align: center;
+    font-family: sans-serif;
 }
-
 
 .d-none{
     display: none;
 }
 
+
+
+/* main code */
+body{
+    background-color: lightblue;
+}
+
+.rule{
+    margin-top: 120px;
+    text-decoration: underline;
+}
+
 .container{
-    margin-top: 200px;
+    margin-top: 120px;
 }
 
 .container *{
     padding: 20px 10px;
+}
+
+#numbers{
+    background-color: white;
+}
+
+button{
+    background-color: #007bff;
+    color: white;
+    padding: 30px 20px;
 }

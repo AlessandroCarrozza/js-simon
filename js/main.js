@@ -20,32 +20,36 @@ console.log(randomNumbersList);
 btnResultDom.addEventListener("click" , function(){
     checkNumbers();
     let resultNumbers = "";
-    if (guessedNumbers.length > 0) {
+    if (guessedNumbers.length > 1) {
         resultNumbers = `I numeri indovinati sono: ${guessedNumbers}`;
+    } else if (guessedNumbers.length == 1) {
+        resultNumbers = `Il numero indovinato è: ${guessedNumbers}`;
     } else {
         resultNumbers = `Non hai indovinato neanche un numero!`;
     }
-    titleSecondsDom.innerHTML = `Ti sei ricordato ${score} numeri su 5. ${resultNumbers}`;
-    mainTitleDom.innerHTML = "";
+    titleSecondsDom.innerHTML = `Ti sei ricordato ${score} numero/i su 5. ${resultNumbers}`;
     console.log(guessedNumbers);
+    btnResultDom.classList.add("d-none");
 })
-
-
-
 
 
 
 // function per mostrare i numeri casuali a schermo
 function showRandomNumbers (min, max, yourList) {
+
     for (let i = min; i < max; i++) {
     
         const randomNumber = (generateUniqueRandomNumber(randomNumbersList, 1, 100));
         yourList.push(randomNumber);
-    
-    }  
-    numbersDom.innerHTML = yourList;
 
-    countDown(2);
+        let trattino = " - ";
+        if (i == max - 1) {
+           trattino = "";
+    }
+        numbersDom.innerHTML += randomNumber + trattino;
+    }  
+
+    countDown(10);
 }
 
 
@@ -76,7 +80,8 @@ function countDown (secondsNumber) {
         if (seconds == 0) {
             clearInterval(clock);
             titleSecondsDom.innerHTML = "Tempo scaduto";
-            numbersDom.innerHTML = "";
+            numbersDom.classList.add("d-none");
+            mainTitleDom.classList.add("d-none");
              setTimeout(function(){
                  userChosenNumbers(5);
                  btnResultDom.classList.remove("d-none");
