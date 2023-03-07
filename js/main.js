@@ -60,8 +60,10 @@ function checkNumbers () {
         for (let i = 0; i < randomNumbersList.length; i++) {
         
             if (randomNumbersList.includes(userNumbers[i])) {
-                score++;
-                guessedNumbers.push(userNumbers[i]);
+                if (!guessedNumbers.includes(userNumbers[i])) {
+                    score++;
+                    guessedNumbers.push(userNumbers[i]);
+                }
             }
         }
         valid = true;
